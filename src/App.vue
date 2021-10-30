@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link>
+      <router-link :to="{name: 'Gallery'}">Gallery</router-link>
+      <router-link :to="{name: 'AddPhoto'}">Add photo</router-link>
     </div>
     <router-view/>
   </div>

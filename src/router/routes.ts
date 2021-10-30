@@ -1,11 +1,17 @@
 import {RouteConfig} from 'vue-router';
-import Home from '@/views/Home.vue';
+import Gallery from '@/views/Gallery.vue';
+import AddPhoto from '@/views/AddPhoto.vue';
 
 const routes: RouteConfig[] = [
     {
         path: '/',
-        name: 'Home',
-        component: Home,
+        name: 'Gallery',
+        component: Gallery,
+    },
+    {
+        path: '/add',
+        name: 'AddPhoto',
+        component: AddPhoto,
     },
 ];
 
