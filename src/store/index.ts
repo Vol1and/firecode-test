@@ -13,23 +13,41 @@ export default new Vuex.Store<MainState>({
         images: [],
     },
     mutations: {
-        updateImages(state, payload) {
+        addImageToGallery(state, payload) {
+            state.images.push(payload);
+        },
+        updateGallery(state, payload) {
             state.images = payload;
+        },
+        deleteImageFromGallery(state, payload) {
+            state.images.splice(state.images.indexOf(payload), 1);
         },
     },
     actions: {
-        updateImagesFromJSON({commit}, payload) {
-            localStorage.setItem('savedGallery', JSON.stringify(payload));
-            commit('updateImages', payload);
+        addImageToGallery({commit, state}, payload) {
+            if (payload.url) {
+                commit('addImageToGallery', payload);
+                localStorage.setItem('savedGallery', JSON.stringify(state.images));
+            }
         },
-        restoreImagesFromJSON({commit}) {
+        updateGalleryFromJSON({commit}, payload) {
+            localStorage.setItem('savedGallery', JSON.stringify(payload));
+            commit('updateGallery', payload);
+        },
+        restoreGalleryFromJSON({commit}) {
             return new Promise((resolve) => {
                 const imgs = localStorage.getItem('savedGallery');
                 if (imgs) {
-                    commit('updateImages', JSON.parse(imgs));
+                    commit('updateGallery', JSON.parse(imgs));
                 }
                 resolve(null);
             });
+        },
+        deleteImageFromGallery({commit, state}, payload) {
+            if (state.images.includes(payload)) {
+                commit('deleteImageFromGallery', payload);
+                localStorage.setItem('savedGallery', JSON.stringify(state.images));
+            }
         },
     },
     getters: {

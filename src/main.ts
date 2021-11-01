@@ -14,4 +14,4 @@ const initApp = () => {
     }).$mount('#app');
 };
 
-store.dispatch('restoreImagesFromJSON').finally(() => initApp());
+store.dispatch('restoreGalleryFromJSON').finally(() => initApp());
