@@ -5,6 +5,7 @@
     <img class="image-topbar__delete-icon" @click="deleteImage" src="../assets/delete-icon.svg" />
   </div>
   <img
+      @click="$emit('imageClicked', imageData)"
       v-show="isLoaded"
       @load="onImgLoad"
       class="image-container__image"
@@ -18,14 +19,10 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import {mapActions, mapGetters} from 'vuex';
+import {mapActions} from 'vuex';
 import {MyImageData} from '@/interfaces';
 
 @Component({
-    computed: {
-        ...mapGetters({
-        }),
-    },
     methods: {
         ...mapActions({
             deleteImageFromGallery: 'deleteImageFromGallery',
