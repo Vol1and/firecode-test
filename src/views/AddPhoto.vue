@@ -35,7 +35,7 @@
         <p class="drag-area__description">Перенесите сюда свой json-файл</p>
       </div>
     </div>
-    <p class="add-form-container__message">{{message}}</p>
+    <p>{{message}}</p>
   </div>
 </template>
 
@@ -61,6 +61,10 @@ export default class AddPhoto extends Vue {
   protected updateGalleryFromJSON!: (payload: Array<MyImageData>) => any;
   protected addImageToGallery!: (payload: MyImageData) => any;
 
+  private jsonFileData = '';
+  private formData : MyImageData = {description: '', url: ''};
+  private message = '';
+
 
   @Ref('file') readonly file!: any;
   @Watch('jsonFileData')
@@ -80,9 +84,6 @@ export default class AddPhoto extends Vue {
       }
   }
 
-  private jsonFileData = '';
-  private formData : MyImageData = {description: '', url: ''};
-  private message = '';
 
   addImage() {
       this.addImageToGallery(this.formData);
@@ -130,7 +131,6 @@ export default class AddPhoto extends Vue {
     margin-bottom: 15px
     color: black
     font-size: 25px
-  &__message
 
 
 .json-add

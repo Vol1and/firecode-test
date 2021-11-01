@@ -1,6 +1,6 @@
 <template>
-<div @mouseover="isTobarVisible = true" @mouseleave="isTobarVisible = false" class="image-container">
-  <div :style="{opacity: isTobarVisible ? 100: 0}" class="image-container__image-topbar image-topbar">
+<div @mouseover="isTopbarVisible = true" @mouseleave="isTopbarVisible = false" class="image-container">
+  <div :style="{opacity: isTopbarVisible ? 100: 0}" class="image-container__image-topbar image-topbar">
     <div class="image-topbar__description">{{imageData.description}}</div>
     <img class="image-topbar__delete-icon" @click="deleteImage" src="../assets/delete-icon.svg" />
   </div>
@@ -33,7 +33,7 @@ export default class GalleryPhoto extends Vue {
   @Prop({type: Object, required: true}) readonly imageData!: MyImageData;
 
   protected deleteImageFromGallery!: (payload: MyImageData) => any;
-  private isTobarVisible = false;
+  private isTopbarVisible = false;
   private isLoaded = false;
 
   deleteImage() {
