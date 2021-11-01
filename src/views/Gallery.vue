@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <div class="gallery-container">
+      <h1 v-if="!images.length" class="gallery-container__no-images-title">В данный момент галерея пуста</h1>
       <div class="gallery-row" v-for="(columnArr, index) in imagesToColumnArr" :key="index">
         <GalleryPhoto @imageClicked="toggleLightbox" v-for="image in columnArr" :key="image.url" :image-data="image"/>
       </div>
@@ -72,6 +73,9 @@ export default class Gallery extends Vue {
 .gallery-container
   justify-content: space-around
   display: flex
+  &__no-images-title
+    margin: 0 auto
+    position: fixed
 
 .gallery-row
   padding: 15px
