@@ -4,7 +4,15 @@
     <div class="image-topbar__description">{{imageData.description}}</div>
     <img class="image-topbar__delete-icon" @click="deleteImage" src="../assets/delete-icon.svg" />
   </div>
-  <img class="image-container__image" :src="imageData.url" />
+  <img
+      v-show="isLoaded"
+      @load="onImgLoad"
+      class="image-container__image"
+      :src="imageData.url"
+  />
+  <div class="image-container__skeleton skeleton"  v-if="!isLoaded">
+    <div class="skeleton__info">Loading, please wait...</div>
+  </div>
 </div>
 </template>
 
@@ -29,10 +37,13 @@ export default class GalleryPhoto extends Vue {
 
   protected deleteImageFromGallery!: (payload: MyImageData) => any;
   private isTobarVisible = false;
-
+  private isLoaded = false;
 
   deleteImage() {
       this.deleteImageFromGallery(this.imageData);
+  }
+  onImgLoad() {
+      this.isLoaded = true;
   }
 }
 </script>
@@ -47,6 +58,20 @@ export default class GalleryPhoto extends Vue {
       width: 100%
       height: 100%
       border-radius: 15px
+    &__skeleton
+      margin: 15px
+
+.skeleton
+  width: 100%
+  height: 200px
+  background: lightgray
+  border-radius: 15px
+  &__info
+    font-size: 20px
+    font-weight: bold
+    position: relative
+    margin: 0 auto
+    top: 40%
 
 .image-topbar
   &__delete-icon
